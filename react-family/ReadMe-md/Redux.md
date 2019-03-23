@@ -15,9 +15,8 @@
     ```javascript
     /*[mapStateToProps(state, [ownProps]): stateProps] 
 
-    mapStateToProps是connect()中的第一个参数,如果定义该参数,那么其会监听Redux store的变化,
+    mapStateToProps是connect()中的第一个参数,如果定义该参数,那么其会监听mapStateToProps中定义的对象的变化,
     只要Redux store发生变化就会调用该参数,然后将Store中的state映射至组件的props.
-
     ownProps代表传入组件的Props,如果定义了该参数,当组件接收到新的Props时,mapStateToProps会被重新调用
 
     */

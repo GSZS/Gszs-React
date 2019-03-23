@@ -237,3 +237,46 @@
     ```
 ---
 
+*     增加Redux
+
+    *   yarn -D add redux redux-react redux-thunk (异步操作中间件)
+
+    ```javascript
+    /*
+        cd src && mkdir redux
+
+        在redux下创建如下目录:
+
+        |---actions
+        |   |
+        |   |--userInfo.js
+        |
+        |---reduces
+        |   |
+        |   |--userInfo.js
+        |   |--index.js (合并Reducers的时候用的到)
+        |
+        |---store
+        |   |
+        |   |--store.js
+        |
+        |
+
+        在pages目录下增加一个测试Redux的组件, --> pages/userInfo/userInfo.js
+    */
+
+    // 修改index.js代码:
+    function renderWithHotReload(RootElement) {
+    ReactDOM.render(
+        <AppContainer>
+            <Provider store={store}>
+                {RootElement}
+            </Provider>
+        </AppContainer>,
+        document.getElementById('app')
+        )
+    }
+    
+
+    ```
+
