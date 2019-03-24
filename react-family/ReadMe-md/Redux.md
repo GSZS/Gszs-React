@@ -21,21 +21,43 @@
 
     */
 
-    const mapStateToProps = state => ({
-        todos : state.xxx // xxx是来自Reducer中所定义的值
-    })
+    const mapStateToProps = (state, ownProps) => {
+    return {
+            userInfo: state.userInfo,   // 监视
+            isLoading: state.isLoading,
+            errMessage: state.errMessage
+        }
+    }
+
+    // 采用bindActionCreators
+
+    import {bindActionCreators} from 'redux'
+    const mapDispatchToProps = {} =(dispatch, ownProps) => {
+    return bindActionCreators({
+            dispatch1: dispatch1
+        },dispatch)
+    }
+
+    // 最简单的方式
+    export default connect(mapStateToProps, {dispatch1})(UserInfo);
     ```
 
 *   ## :palm_treemap:mapDispatchToProps
     ```javascript
     /* [mapDispatchToProps(dispatch, [ownProps]): dispatchProps] 
 
-    mapDispatchToProps是将需要更改state的行为(action)派发给reducers
+    mapDispatchToProps作用是当你要通过一个函数来触发action时需要在mapDispatchToProps定义那个改变函数。
+
+    ** 详细解释: 因为调用触发派发action的 "dispatch1" 函数只会返回action,并没有将其派发出去,所以需要使用dispatch将 "dispatch1" 包裹派发出去,但是为了不让组件感知到dispatch的存在,所以需要对 "dispatch1" 进行包装一下
     */
 
-    const mapDispatchToProps = dispatch => ({
-        todos: id => dispatch(xxx())
-    })
+    const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        dispatch1: () => {
+                dispatch(dispatch1())
+            }
+        }
+    }
 
     ```
 

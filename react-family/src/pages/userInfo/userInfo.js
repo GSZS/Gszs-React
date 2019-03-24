@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getUserInfo} from '../../redux/actions/userInfo'
+import {bindActionCreators} from 'redux'
 
 class UserInfo extends Component {
 
@@ -35,12 +36,19 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        UserInfo: () => {
-            dispatch(getUserInfo)
-        }
-    }
+// const mapDispatchToProps = (dispatch, ownProps) => {
+//     return {
+//         getUserInfo: () => {
+//             dispatch(getUserInfo())
+//         }
+//     }
+// }
+
+const mapDispatchToProps = {} =(dispatch, ownProps) => {
+    return bindActionCreators({
+        getUserInfo: getUserInfo
+    },dispatch)
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserInfo);
