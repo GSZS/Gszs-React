@@ -9,7 +9,8 @@ module.exports = {
     ],
     output: {
         path: path.join(__dirname, './dist'),
-        filename: 'bundle.js'
+        filename: '[name].[hash].js',   // 处理缓存
+        chunkFilename: '[name].[chunkhash].js' // 区分加载的js
     },
     mode: "development",
     devServer: { // 热更
@@ -31,11 +32,24 @@ module.exports = {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader', 'less-loader'],
                 include: path.join(__dirname, '/node_modules/antd') // 处理Antd.css
+            },
+            {
+                test: /\.(jpg|png|gif)$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 8192 // <=8K的图片可以直接插入<img/>中
+                    }
+                }
             }
         ]
     },
     plugins: [
-        new Webpack.HotModuleReplacementPlugin() //启动热替换       
+        new Webpack.HotModuleReplacementPlugin(), //启动热替换
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: path.join(__dirname, './src/index.html')
+        })
     ],
     resolve: { // 增加别名设置
         alias: {

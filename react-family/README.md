@@ -288,6 +288,23 @@
         use: ['style-loader', 'css-loader', 'less-loader'],
     }
     ```
+---
+
+*     编译图片
+    *   yarn -D add url-loader file-loader
+    ```javascript
+    // 在webpack.dev.config.js加载器中module中的rules中添加如下配置
+    {
+        test: /\.(jpg|png|gif)$/,
+        use: [{
+            loader: 'url-loader',
+            options: {
+                limit: 8192 // <=8K的图片可以直接插入<img/>中
+            }
+        }]
+    }
+    ```
+---
 
 *     使用Ant Design of React组件库
     *   yarn -D add antd
@@ -311,6 +328,7 @@
           }]
     ]
     ```
+---
 
 *     使用Redux DevTools调试工具
     *   yarn -D add redux-devtools-extension
@@ -319,5 +337,131 @@
 
     import {composeWithDevTools} from 'redux-devtools-extension'
     const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunkMiddleware )))
+    ```
+---
+
+*     按需加载
+    *   yarn -D add @babel/plugin-proposal-decorators
+    
+    *   yarn -D add @babel/plugin-proposal-class-properties
+    ```javascript
+    // 在.babelrc中新增
+    [
+        "@babel/plugin-proposal-decorators",
+        {"legacy": true}
+    ],
+    [
+        "@babel/plugin-proposal-class-properties",
+        {"loose": true}     
+    ]
+
+    // 在router下创建bundle.js
+    import React, {Component} from 'react'
+
+    class Bundle extends Component {
+        state = {
+            // short for "module" but that's a keyword in js, so "mod"
+            mod: null
+        };
+
+        componentWillMount() {
+            this.load(this.props)
+        }
+
+        componentWillReceiveProps(nextProps) {
+            if (nextProps.load !== this.props.load) {
+                this.load(nextProps)
+            }
+        }
+
+        load(props) {
+            this.setState({
+                mod: null
+            });
+            props.load((mod) => {
+                this.setState({
+                    // handle both es imports and cjs
+                    mod: mod.default ? mod.default : mod
+                })
+            })
+        }
+
+        render() {
+            return this.props.children(this.state.mod)
+        }
+    }
+
+    export default Bundle;
+
+    // 修改路由
+    import React from 'react';
+    import Bundle from './bundle'
+    import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+
+    import Home from 'bundle-loader?lazy&name=home!pages/Home'
+    import Page1 from 'bundle-loader?lazy&name=page1!pages/Page'
+    import UserInfo from 'bundle-loader?lazy&name=userinfo!pages/userInfo/userInfo'
+    import A_date from 'bundle-loader?lazy&name=a_date!pages/Antd/demo01'
+
+    const Loading = function () {
+        return <div>Loading...</div>
+    };
+
+    const createComponent = (component) => (props) => (
+        <Bundle load={component}>
+            {
+                (Component) => Component ? <Component {...props} /> : <Loading/>
+            }
+        </Bundle>
+    );
+
+    const getRouter = () => (
+        <Router>
+            <div>
+                <ul>
+                    <li><Link to="/">首页</Link></li>
+                    <li><Link to="/page1">Page1</Link></li>
+                    <li><Link to="/userinfo">UserInfo</Link></li>
+                    <li><Link to='/Antd'>Antd</Link></li>
+                </ul>
+                <Switch>
+                    <Route exact path="/" component={createComponent(Home)}/>
+                    <Route path="/page1" component={createComponent(Page1)}/>
+                    <Route path="/userinfo" component={createComponent(UserInfo)}/>
+                    <Route path="/Antd" component={createComponent(A_date)} />
+                </Switch>
+            </div>
+        </Router>
+    );
+
+    export default getRouter;
+    ```
+---
+
+*     缓存
+    ```javascript
+    /* 假如用户第一次访问页面后,采用缓存机制,缓存了旧的home.js , 那如果当更新了home.js后.则会导致用户出现加载
+       错误,解决如下。修改webpack.dev.config.js
+    */
+
+    output: {
+        path: path.join(__dirname, './dist'),
+        filename: '[name].[hash].js',   // 处理缓存
+        chunkFilename: '[name].[chunkhash].js' // 区分加载的js
+    },
+
+    /* 配合HtmlWebpackPlugin模块
+        yarn -D add html-webpack-plugin
+
+        // 修改webpack.dev.config.js中的plugins配置
+    */
+    plugins: [
+        new Webpack.HotModuleReplacementPlugin(), //启动热替换
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: path.join(__dirname, './src/index.html')
+        })
+    ],
+
     ```
 
