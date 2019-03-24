@@ -21,11 +21,18 @@ module.exports = {
         //   host: '0.0.0.0' //服务器外部能访问
     },
     module: {
-        rules: [{
-            test: /\.js$/,
-            use: ['babel-loader?cacheDirectory=true'], // cacheDirectory=true开启缓存机制,加快编译速度
-            include: path.join(__dirname, './src')
-        }]
+        rules: [
+            {
+                test: /\.js$/,
+                use: ['babel-loader?cacheDirectory=true'], // cacheDirectory=true开启缓存机制,加快编译速度
+                include: path.join(__dirname, './src')
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader', 'less-loader'],
+                include: path.join(__dirname, '/node_modules/antd') // 处理Antd.css
+            }
+        ]
     },
     plugins: [
         new Webpack.HotModuleReplacementPlugin() //启动热替换       

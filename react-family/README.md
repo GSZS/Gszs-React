@@ -276,7 +276,48 @@
         document.getElementById('app')
         )
     }
-    
+    ```
+---
 
+*     编译css, less
+    *   yarn -D add less less-loader style-loader css-loader
+    ```javascript
+    // 在webpack.dev.config.js加载器中module中的rules中添加如下配置
+    {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader', 'less-loader'],
+    }
+    ```
+
+*     使用Ant Design of React组件库
+    *   yarn -D add antd
+
+    *   yarn -D add babel-plugin-import
+    ```javascript
+    // 注意一个地方,如果要使用Antd.css,需要在css转换器规则下增加一行
+    {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader', 'less-loader'],
+        include: path.join(__dirname, 'node_modules/antd') // 导入antd
+    }
+
+    // 使用按需加载,则不用再显式导入
+    "plugins": [
+        "react-hot-loader/babel",
+        ["import", {
+            "libraryName": "antd",
+            "libraryDirectory": "es",
+            "style": "css" // `style: true` 会加载 less 文件
+          }]
+    ]
+    ```
+
+*     使用Redux DevTools调试工具
+    *   yarn -D add redux-devtools-extension
+    ```javascript
+    // '/store/store.js中修改'
+
+    import {composeWithDevTools} from 'redux-devtools-extension'
+    const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunkMiddleware )))
     ```
 
