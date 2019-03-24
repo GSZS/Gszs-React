@@ -36,19 +36,5 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-// const mapDispatchToProps = (dispatch, ownProps) => {
-//     return {
-//         getUserInfo: () => {
-//             dispatch(getUserInfo())
-//         }
-//     }
-// }
 
-const mapDispatchToProps = {} =(dispatch, ownProps) => {
-    return bindActionCreators({
-        getUserInfo: getUserInfo
-    },dispatch)
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserInfo);
+export default connect(mapStateToProps, {getUserInfo})(UserInfo);
