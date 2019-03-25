@@ -4,31 +4,29 @@
 
     *   [创建文件夹](#创建文件夹)
 
-    *   [创建package.json基础配置](#创建package.json基础配置)
+    *   [创建package.json基础配置](#创建packagejson基础配置)
 
     *   [依赖安装webpack webpack-cli](#依赖安装webpack-webpack-cli)
 
     *   [创建webpack.dev.config.js](#创建webpackdevconfigjs并进行基础设置如下配置)
     
-    *   [创建主index.js](#创建src目录,并再里面创建index.js)
-    
-    *   [创建src目录](#创建src目录,并再里面创建index.js)
+    *   [创建src目录](#创建src目录,并再里面创建indexjs)
     
     *   [终端进行打包测试](#终端进行打包测试)
     
-    *   [配置.balbelrc](#安装babel一系列转换工具,并配置.balbelrc)
+    *   [配置.balbelrc](#安装babel一系列转换工具,并配置balbelrc)
     
     *   [安装react react-dom](#安装react-react-dom)
     
-    *   [打包测试](#然后修改index.js中进行打包测试)
+    *   [打包测试](#然后修改indexjs中进行打包测试)
     
     *   [创建一个存放视图组件文件夹](#创建一个存放视图组件文件夹)
     
     *   [react-router](#react-router)
 
-    *   [热更新](#热更新(安装webpack-dev-server))
+    *   [热更新](#热更新安装webpack-dev-server)
     
-    *   [热更替](#热更替(由于热更新会导致状态丢失,所以需要使用热更替进行状态保存))
+    *   [热更替](#热更替由于热更新会导致状态丢失,所以需要使用热更替进行状态保存)
     
     *   [优化路径](#优化路径)
     
