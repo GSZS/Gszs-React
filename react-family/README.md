@@ -644,14 +644,38 @@
 ---
 
 *   #### 优化缓存机制
+    *   yarn -D add clean-webpack-plugin
+
     ```javascript
     plugins: [
         // ++ new webpack.HashedModuleIdsPlugin() // 使vendor.xxx.js缓存在本地
+        // ++ new clean-webpack-plugin() // 用于在构建之前清除构建文件夹
     ]
     ```
 ---
 
+*   #### 抽离CSS
+    *   yarn -D add extract-text-webpack-plugin
+    ```javascript
 
+    rules: [
+        {
+            test: /\.css$/,
+        // --    use: ['style-loader', 'css-loader', 'less-loader'],
+        // ++    use: ExtractTextWebpackPlugin.extract({
+        // ++               fallback: 'style-loader',
+        // ++               use: ['css-loader','less-loader']
+        // ++         })
+            include: path.join(__dirname, '/node_modules/antd') // 处理Antd.css
+        },
+    ]
 
-
+    plugins : [
+        // ++ new ExtractTextWebpackPlugin({
+        // ++       filename: 'style.css'
+        // ++       allchunks: true 
+        // ++   })
+    ]
+    ```
+---
 

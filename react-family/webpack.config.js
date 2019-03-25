@@ -2,10 +2,12 @@ const path = require('path')
 const Webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const UglifyJSPlugin  = require('uglifyjs-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
     mode: "production", // 开发模式
-    // devtool: 'cheap-module-source-map', // 会降低打包速度,调试时开启
+    devtool: 'cheap-module-source-map', // 会降低打包速度,调试时开启
     entry: {
         app: [
             path.join(__dirname, 'src/index.js')
@@ -27,7 +29,10 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader', 'less-loader'],
+                use: ExtractTextWebpackPlugin.extract({ // 抽离css
+                    fallback: 'style-loader',
+                    use: ['css-loader','less-loader']
+                }),
                 include: path.join(__dirname, '/node_modules/antd') // 处理Antd.css
             },
             {
@@ -59,7 +64,12 @@ module.exports = {
                 'NODE_ENV': JSON.stringify('production')
             }
         }),
-        new webpack.HashedModuleIdsPlugin() // 使vendor.xxx.js缓存在本地
+        new Webpack.HashedModuleIdsPlugin(), // 使vendor.xxx.js缓存在本地
+        new CleanWebpackPlugin(), // 用于在构建之前删除构建文件夹 :TODO:CleanWebpackPlugin()
+        new ExtractTextWebpackPlugin({  // :TODO: ExtractTextWebpackPlugin()
+            filename: 'style.css',
+            allChunks: true,
+        })
     ],
     resolve: { // 增加别名设置
         alias: {
@@ -72,3 +82,4 @@ module.exports = {
     },
     devtool: 'inline-source-map'
 }
+
