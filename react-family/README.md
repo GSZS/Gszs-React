@@ -3,7 +3,7 @@
 *   简述:
 
     *   []
-    *   [安装react react-dom](安装react-react-dom)
+    *   [安装react react-dom](#安装react-react-dom)
 
 ---
 
