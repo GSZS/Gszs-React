@@ -1,28 +1,23 @@
-const path = require('path')
+const path = require('path') 
 const Webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const UglifyJSPlugin  = require('uglifyjs-webpack-plugin')
 
 module.exports = {
     mode: "production", // 开发模式
+    // devtool: 'cheap-module-source-map', // 会降低打包速度,调试时开启
     entry: {
         app: [
-            // 'react-hot-loader/patch', // 热更替
             path.join(__dirname, 'src/index.js')
         ],
-        verdor: ['react','react-redux','react-dom','react-router-dom','redux'] // 提取公共代码
+        verdor: ['react','react-redux','react-dom','react-router-dom','redux'] // 提取公共代码 :TODO: 需要去webpack官网了解提取公共代码具体步骤
     },
     output: {
         path: path.join(__dirname, './dist'),
         filename: '[name].[chunkhash].js',   // 处理缓存
-        chunkFilename: '[name].[chunkhash].js' // 区分加载的js
+        chunkFilename: '[name].[chunkhash].js', // 区分加载的js
+        publicPath: '/' // 输出到指定的目的地
     },
-    // devServer: { // 热更
-    //     contentBase: path.join(__dirname, './dist'),
-    //     hot: true,
-    //     historyApiFallback: true,
-    //     compress: true,
-    //     clientLogLevel: 'warning',
-    // },
     module: {
         rules: [
             {
@@ -47,7 +42,6 @@ module.exports = {
         ]
     },
     plugins: [
-        // new Webpack.HotModuleReplacementPlugin(), //启动热替换
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: path.join(__dirname, './src/index.html')
@@ -58,7 +52,14 @@ module.exports = {
                 name: 'vendor'
             }  
           },
-        })
+        }),
+        new UglifyJSPlugin(), // 文件压缩
+        new Webpack.DefinePlugin({ // 指定环境,用于针对特定的环境进行一些优化
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
+        new webpack.HashedModuleIdsPlugin() // 使vendor.xxx.js缓存在本地
     ],
     resolve: { // 增加别名设置
         alias: {

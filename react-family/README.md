@@ -48,6 +48,18 @@
     
     *   [生产环境构建](#生产环境构建)
 
+    *   [文件压缩](#文件压缩)
+
+    *   [指定环境](#指定环境)
+
+    *   [优化缓存机制](#优化缓存机制)
+
+---
+
+*   #### :heavy_exclamation_mark: 本文的一些符号:
+    *   // ++ 代表有增加的部分
+
+    *   // -- 代表有减少的部分
 ---
 
 *   #### 创建文件夹
@@ -523,16 +535,16 @@
             'react-hot-loader/patch', // 热更替
             path.join(__dirname, 'src/index.js')
         ],
-        verdor: ['react','react-redux','react-dom','react-router-dom','redux'] // 提取公共代码
+        //++ verdor: ['react','react-redux','react-dom','react-router-dom','redux'] // 提取公共代码
     },
     
-    new Webpack.LoaderOptionsPlugin({
-        optimzation: {
-            splitChunks: {
-                name: 'vendor'
-            }  
-        },
-    })
+    // ++ new Webpack.LoaderOptionsPlugin({
+    // ++    optimzation: {
+    // ++        splitChunks: {
+    // ++            name: 'vendor'
+    // ++        }  
+    // ++    },
+    // ++ })
     ```
 ---
 
@@ -609,3 +621,37 @@
     }
     ```
 ---
+*   #### 文件压缩
+    *   yarn -D add uglifyjs-webpack-plugin
+    ```javascript
+    //修改webpack.config.js
+
+    // ++ const UglifyJSPlugin  = require('uglifyjs-webpack-plugin')
+    // ++ new UglifyJSPlugin()
+    ```
+---
+
+*   #### 指定环境
+    ```javascript
+    plugins: [
+        // ++ new Webpack.DefinePlugin({ // 指定环境,用于针对特定的环境进行一些优化
+        // ++     'process.env': {
+        // ++         'NODE_ENV': JSON.stringify('production')
+        // ++     }
+        // ++  })
+    ]
+    ```
+---
+
+*   #### 优化缓存机制
+    ```javascript
+    plugins: [
+        // ++ new webpack.HashedModuleIdsPlugin() // 使vendor.xxx.js缓存在本地
+    ]
+    ```
+---
+
+
+
+
+
