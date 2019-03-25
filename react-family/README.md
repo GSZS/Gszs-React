@@ -10,11 +10,11 @@
 
     *   [创建webpack.dev.config.js](#创建webpackdevconfigjs并进行基础设置如下配置)
     
-    *   [创建src目录](#创建src目录,并再里面创建indexjs)
+    *   [创建src目录](#创建src目录并再里面创建indexjs)
     
     *   [终端进行打包测试](#终端进行打包测试)
     
-    *   [配置.balbelrc](#安装babel一系列转换工具,并配置balbelrc)
+    *   [配置.balbelrc](#安装babel一系列转换工具并配置balbelrc)
     
     *   [安装react react-dom](#安装react-react-dom)
     
@@ -26,13 +26,13 @@
 
     *   [热更新](#热更新安装webpack-dev-server)
     
-    *   [热更替](#热更替由于热更新会导致状态丢失,所以需要使用热更替进行状态保存)
+    *   [热更替](#热更替由于热更新会导致状态丢失所以需要使用热更替进行状态保存)
     
     *   [优化路径](#优化路径)
     
     *   [Redux](#增加Redux)
     
-    *   [编译css, less](#编译css,-less)
+    *   [编译css, less](#编译css-less)
     
     *   [编译图片](#编译图片)
     
@@ -127,7 +127,7 @@
     )
     ```
 
-*   创建一个存放视图组件文件夹
+*   #### 创建一个存放视图组件文件夹
     
         mkdir view && cd view && mkdir layout && vim HeaderMenua
     ```javascript
@@ -147,7 +147,7 @@
     //然后在index.js中将这个组件倒入,终端yarn build打包测试
     ```
 
-*   react-router
+*   #### react-router
     
         yarn -D add react-router-dom
         新建router文件夹和组件 -> mkdir router && touch router/router.js
@@ -205,7 +205,7 @@
 
     ```
 
-*   热更新(安装webpack-dev-server)
+*   #### 热更新(安装webpack-dev-server)
 
         yarn global add webpack-dev-server
     ```javascript
@@ -224,7 +224,7 @@
     // 终端yarn dev进行测试,访问8080
     ```
 
-*   热更替(由于热更新会导致状态丢失,所以需要使用热更替进行状态保存)
+*   #### 热更替(由于热更新会导致状态丢失,所以需要使用热更替进行状态保存)
 
         yarn -D add react-hot-loader
     ```javascript
@@ -273,7 +273,7 @@
     ```
 ---
 
-*     优化路径
+*   #### 优化路径
     ```javascript
     // webpack.dev.config.js中增加如下
     resolve: { // 增加别名设置
@@ -286,7 +286,7 @@
     ```
 ---
 
-*     增加Redux
+*   #### 增加Redux
 
     *   yarn -D add redux redux-react redux-thunk (异步操作中间件)
 
@@ -328,7 +328,7 @@
     ```
 ---
 
-*     编译css, less
+*   #### 编译css, less
     *   yarn -D add less less-loader style-loader css-loader
     ```javascript
     // 在webpack.dev.config.js加载器中module中的rules中添加如下配置
@@ -339,7 +339,7 @@
     ```
 ---
 
-*     编译图片
+*   #### 编译图片
     *   yarn -D add url-loader file-loader
     ```javascript
     // 在webpack.dev.config.js加载器中module中的rules中添加如下配置
@@ -389,7 +389,7 @@
     ```
 ---
 
-*     按需加载
+*   #### 按需加载
     *   yarn -D add @babel/plugin-proposal-decorators
     
     *   yarn -D add @babel/plugin-proposal-class-properties
@@ -487,7 +487,7 @@
     ```
 ---
 
-*     缓存
+*   #### 缓存
     ```javascript
     /* 假如用户第一次访问页面后,采用缓存机制,缓存了旧的home.js , 那如果当更新了home.js后.则会导致用户出现加载
        错误,解决如下。修改webpack.dev.config.js
@@ -515,7 +515,7 @@
     ```
 ---
 
-*     提取公共代码
+*   #### 提取公共代码
     ```javascript
     // 修改如下两处地方
     entry: {
@@ -536,7 +536,7 @@
     ```
 ---
 
-*     生产环境构建
+*   #### 生产环境构建
     *   vim webpack.config.js
     ```javascript
     /* 增加如下内容(大体上与开发模式相同) :
