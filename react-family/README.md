@@ -8,47 +8,47 @@
 
     *   [依赖安装webpack webpack-cli](#依赖安装webpack-webpack-cli)
 
-    *   [创建webpack.dev.config.js](创建webpack.dev.config.js并进行基础设置(如下配置))
+    *   [创建webpack.dev.config.js](#创建webpack.dev.config.js并进行基础设置(如下配置))
     
-    *   [创建主index.js](创建src目录,并再里面创建index.js)
+    *   [创建主index.js](#创建src目录,并再里面创建index.js)
     
-    *   [创建src目录](创建src目录,并再里面创建index.js)
+    *   [创建src目录](#创建src目录,并再里面创建index.js)
     
-    *   [终端进行打包测试](终端进行打包测试)
+    *   [终端进行打包测试](#终端进行打包测试)
     
-    *   [配置.balbelrc](安装babel一系列转换工具,并配置.balbelrc)
+    *   [配置.balbelrc](#安装babel一系列转换工具,并配置.balbelrc)
     
-    *   [安装react react-dom](安装react-react-dom)
+    *   [安装react react-dom](#安装react-react-dom)
     
-    *   [打包测试](然后修改index.js中进行打包测试)
+    *   [打包测试](#然后修改index.js中进行打包测试)
     
-    *   [创建一个存放视图组件文件夹](创建一个存放视图组件文件夹)
+    *   [创建一个存放视图组件文件夹](#创建一个存放视图组件文件夹)
     
-    *   [react-router](react-router)
+    *   [react-router](#react-router)
 
-    *   [热更新](热更新(安装webpack-dev-server))
+    *   [热更新](#热更新(安装webpack-dev-server))
     
-    *   [热更替](热更替(由于热更新会导致状态丢失,所以需要使用热更替进行状态保存))
+    *   [热更替](#热更替(由于热更新会导致状态丢失,所以需要使用热更替进行状态保存))
     
-    *   [优化路径](优化路径)
+    *   [优化路径](#优化路径)
     
-    *   [Redux](增加Redux)
+    *   [Redux](#增加Redux)
     
-    *   [编译css, less](编译css,-less)
+    *   [编译css, less](#编译css,-less)
     
-    *   [编译图片](编译图片)
+    *   [编译图片](#编译图片)
     
-    *   [Ant Design of React](使用Ant-Design-of-React组件库)
+    *   [Ant Design of React](#使用Ant-Design-of-React组件库)
     
-    *   [Redux DevTools](使用Redux-DevTools调试工具)
+    *   [Redux DevTools](#使用Redux-DevTools调试工具)
     
-    *   [按需加载](按需加载)
+    *   [按需加载](#按需加载)
     
-    *   [缓存](缓存)
+    *   [缓存](#缓存)
     
-    *   [提取公共代码](提取公共代码)
+    *   [提取公共代码](#提取公共代码)
     
-    *   [生产环境构建](生产环境构建)
+    *   [生产环境构建](#生产环境构建)
 
 ---
 
