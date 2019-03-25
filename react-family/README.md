@@ -8,7 +8,7 @@
 
     *   [依赖安装webpack webpack-cli](#依赖安装webpack-webpack-cli)
 
-    *   [创建webpack.dev.config.js](#创建webpack.dev.config.js并进行基础设置(如下配置))
+    *   [创建webpack.dev.config.js](#创建webpackdevconfigjs并进行基础设置(如下配置))
     
     *   [创建主index.js](#创建src目录,并再里面创建index.js)
     
