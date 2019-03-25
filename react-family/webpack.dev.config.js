@@ -3,10 +3,13 @@ const Webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-    entry: [
-        'react-hot-loader/patch', // 热更替
-        path.join(__dirname, 'src/index.js')
-    ],
+    entry: {
+        app: [
+            'react-hot-loader/patch', // 热更替
+            path.join(__dirname, 'src/index.js')
+        ],
+        verdor: ['react','react-redux','react-dom','react-router-dom','redux'] // 提取公共代码
+    },
     output: {
         path: path.join(__dirname, './dist'),
         filename: '[name].[hash].js',   // 处理缓存
@@ -49,6 +52,13 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: path.join(__dirname, './src/index.html')
+        }),
+        new Webpack.LoaderOptionsPlugin({
+        optimzation: {
+            splitChunks: {
+                name: 'vendor'
+            }  
+          },
         })
     ],
     resolve: { // 增加别名设置

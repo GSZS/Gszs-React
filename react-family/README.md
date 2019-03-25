@@ -464,4 +464,27 @@
     ],
 
     ```
+---
 
+*     提取公共代码
+    ```javascript
+    // 修改如下两处地方
+    entry: {
+        app: [
+            'react-hot-loader/patch', // 热更替
+            path.join(__dirname, 'src/index.js')
+        ],
+        verdor: ['react','react-redux','react-dom','react-router-dom','redux'] // 提取公共代码
+    },
+    
+    new Webpack.LoaderOptionsPlugin({
+        optimzation: {
+            splitChunks: {
+                name: 'vendor'
+            }  
+        },
+    })
+    ```
+---
+
+*     生产环境构建
