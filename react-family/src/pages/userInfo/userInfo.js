@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getUserInfo} from '../../redux/actions/userInfo'
-import {bindActionCreators} from 'redux'
 
 class UserInfo extends Component {
 
     render() {
         const {isLoading, userInfo ,errMessage} = this.props;
-        
-        console.log(this.props.isLoading);
+        console.log(this.props);
         return (
             <div>
                 {

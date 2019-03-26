@@ -23,7 +23,7 @@ const userInfo_fn = (state = initState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                userInfo: action.userInfo,
+                userInfo: action.result.data,
                 errMessage: ''
             }
         case GET_USER_INFO_FAILD:

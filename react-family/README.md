@@ -53,6 +53,10 @@
     *   [指定环境](#指定环境)
 
     *   [优化缓存机制](#优化缓存机制)
+    
+    *   [抽离CSS](#抽离CSS)
+
+    *   [使用axios和middleware优化API请求(中间件)](#使用axios和middleware优化API请求中间件)
 
 ---
 
@@ -679,3 +683,130 @@
     ```
 ---
 
+*   #### 使用axios和middleware优化API请求(中间件)
+    *   yarn -D add axios
+    *   cd src/middleware && mkdir middleware && cd middleware && vim promiseMiddleware.js
+    ```javascript
+    /* promiseMiddleware.js */
+    // 请求中间件
+    import axios from 'axios'
+
+    export default store => next => action => {
+        const {dispatch, getState} = store;
+        
+        // 如果是函数直接运行跳过
+        if(typeof action === 'function'){
+            action(dispatch, getState)
+            return;
+        }
+
+        // 解析action
+        console.log('action->',action);
+        const {
+            promise,
+            types,
+            afterSuccess,
+            ...rest
+        } = action;
+
+        if(!action.promise){
+            return next(action);
+        }
+
+        // 解析types
+        const [
+            REQUEST,
+            SUCCESS,
+            FALID
+        ] = types;
+
+        // 请求流程
+        next({
+            ...rest,
+            type: REQUEST
+        });
+        const onSuccess = result => {
+            next({
+                ...rest,
+                result,
+                type: SUCCESS
+            })
+            console.log(result);
+            if(afterSuccess){
+                afterSuccess(dispatch, getState, result)
+            }
+        }
+        const onReject = error => {
+            next({
+                ...rest,
+                error,
+                type: FALID
+            })
+        }
+
+        return promise(axios).then(onSuccess,onReject).catch(error => {
+            console.log(`捕获错误: ${error}`);
+            onReject(error)
+        })
+    }
+
+    /* store.js */
+
+    // ++   import promiseMiddleware from '../middleware/promiseMiddleware'
+    // ++   const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(promiseMiddleware)))
+
+    /* actions/userInfo.js */
+    
+    // const getUserInfoRequest = () => {
+    // --    return {
+    // --        type: GET_USER_INFO_REQUEST,
+    // --    }
+    // -- }
+
+    // -- const getUserInfoSuccess = (userInfo) => {
+    // --    return {
+    // --        type: GET_USER_INFO_SUCCESS,
+    // --        userInfo: userInfo,
+    // --    }
+    // -- }
+
+    // -- const getUserInfoFaild = () => {
+    // --     return {
+    // --         type: GET_USER_INFO_FAILD,
+    // --     }
+    // -- }
+
+    // -- export const getUserInfo = () => {
+    // --     return (dispatch) => {
+    // --         // 开始请求前
+    // --         dispatch(getUserInfoRequest())
+
+    // --         return fetch('http://localhost:8080/api/user.json')
+    // --         .then(response => response.json())
+    // --        .then(json => {
+    // --             // 获取数据
+    // --             dispatch(getUserInfoSuccess(json))
+    // --         }).catch(() => {
+    // --             // 捕获错误
+    // --             dispatch(getUserInfoFaild())
+    // --         })
+    // --     }
+    // -- }
+
+    // ++    export function getUserInfo(){
+    // ++     return{
+    // ++         types: [GET_USER_INFO_REQUEST,GET_USER_INFO_SUCCESS,GET_USER_INFO_FAILD],
+    // ++         promise: axios => axios.get('http://localhost:8080/api/user.json')
+    // ++     }
+    // ++ }
+
+    /* reducers/userInfo.js */
+    case GET_USER_INFO_SUCCESS:
+         return {
+             ...state,
+             isLoading: false,
+    //  ++       userInfo: action.result.data,
+             errMessage: ''
+        }
+    ```
+---

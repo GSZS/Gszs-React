@@ -1,8 +1,9 @@
 import {createStore, applyMiddleware} from 'redux'
-import thunkMiddleware  from 'redux-thunk'// 引入中间件thunk
+import promiseMiddleware from '../middleware/promiseMiddleware'
 import rootReducer from '../reducers/userInfo.js'
 import {composeWithDevTools} from 'redux-devtools-extension'
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunkMiddleware )))
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(promiseMiddleware)))
 export default store
 
+    
