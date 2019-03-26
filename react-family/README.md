@@ -810,3 +810,13 @@
         }
     ```
 ---
+
+*   #### 合并提取Webpack公共配置
+    *   yarn -D add webpack-merge
+    *   vim webpack.common.js
+    ```javascript
+    /* 假如在webpack.dev.config.js中修改了css加载器,那么在webpack.config.js中也需要同理修改.
+       所以把这两个webpack中相同的配置提取出来.
+    */
+    ```
+---
