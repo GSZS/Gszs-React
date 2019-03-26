@@ -9,7 +9,7 @@ const WebpackMerge = require('webpack-merge')
 
 const proConfig = {
     mode: "production", // 生产模式
-    devtool: 'cheap-module-source-map', // 会降低打包速度,调试时开启
+    devtool: "cheap-module-source-map",
     output: {
         publicPath: '/' // 输出到指定的目的地
     },
@@ -32,8 +32,8 @@ const proConfig = {
             }
         }),
         new Webpack.HashedModuleIdsPlugin(), // 使vendor.xxx.js缓存在本地
-        new CleanWebpackPlugin(), // 用于在构建之前删除构建文件夹 :TODO:CleanWebpackPlugin()
-        new ExtractTextWebpackPlugin({  // :TODO: ExtractTextWebpackPlugin()
+        new CleanWebpackPlugin(), // 用于在构建之前删除构建文件夹
+        new ExtractTextWebpackPlugin({
             filename: 'style.css',
             allChunks: true,
         })

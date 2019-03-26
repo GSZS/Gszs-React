@@ -5,6 +5,7 @@ const commonConfig = require('./webpack.common.config.js')
 
 const devConfig = {
     mode: "development",
+    devtool: "cheap-module-eval-source-map",
     entry: {
         app: [
             'react-hot-loader/patch', // 热更替
@@ -35,7 +36,7 @@ const devConfig = {
     ]
 }
 
-module.exports = WebpackMerge({ // :TODO:webpack-merge
+module.exports = WebpackMerge({
     customizeArray(a, b, key){
         // entry.app不合并,替换掉
         if(key === 'entry.app'){

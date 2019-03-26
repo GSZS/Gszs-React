@@ -4,7 +4,6 @@ const Webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-    devtool: 'inline-source-map', // TODO: devtool
     entry: {
         app: [
             path.join(__dirname, 'src/index.js')
