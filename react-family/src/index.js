@@ -11,6 +11,12 @@ renderWithHotReload(getRouter())
 
 /*热更新*/
 if (module.hot) {
+
+    // redux模块热替换
+    module.hot.accept("./redux/reducers/userInfo.js", () => {
+        const nextCombineReducers = require("./redux/reducers/userInfo.js").default;
+        store.replaceReducer(nextCombineReducers);
+    });
     module.hot.accept('./router/router', () => {
         const getRouter = require('./router/router').default;
         renderWithHotReload(getRouter());

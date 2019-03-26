@@ -21,7 +21,6 @@ const proConfig = {
                     fallback: 'style-loader',
                     use: ['css-loader','less-loader']
                 }),
-                include: path.join(__dirname, '/node_modules/antd') // 处理Antd.css
             },
         ]
     },

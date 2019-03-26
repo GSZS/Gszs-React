@@ -24,11 +24,6 @@ module.exports = {
                 include: path.join(__dirname, './src')
             },
             {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader', 'less-loader'],
-                include: path.join(__dirname, '/node_modules/antd') // 处理Antd.css
-            },
-            {
                 test: /\.(jpg|png|gif)$/,
                 use: {
                     loader: 'url-loader',

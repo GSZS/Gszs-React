@@ -58,6 +58,8 @@
 
     *   [使用axios和middleware优化API请求(中间件)](#使用axios和middleware优化API请求中间件)
 
+    *   [优化目录结构](#优化目录结构)
+
 ---
 
 *   #### :heavy_exclamation_mark: 本文的一些符号:
@@ -820,3 +822,19 @@
     */
     ```
 ---
+
+*   #### 优化目录结构
+    *   💫<b>待定</b>
+---
+
+*   #### Redux模块热替换
+    ```javascript
+    /*index.js*/
+    // ++ redux模块热替换
+    // ++ module.hot.accept("./redux/reducers/userInfo.js", () => {
+    // ++     const nextCombineReducers = require("./redux/reducers/userInfo.js").default;
+    // ++     store.replaceReducer(nextCombineReducers);
+    // ++ });
+    ```
+
+    
