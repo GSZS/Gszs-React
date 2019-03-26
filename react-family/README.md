@@ -60,6 +60,12 @@
 
     *   [优化目录结构](#优化目录结构)
 
+    *   [模拟Ajax数据](#模拟Ajax数据)
+
+    *   [CSS Modules](CSS-Modules)
+
+    *   [结束代表刚开始](后续)
+
 ---
 
 *   #### :heavy_exclamation_mark: 本文的一些符号:
@@ -824,7 +830,7 @@
 ---
 
 *   #### 优化目录结构
-    *   💫<b>待定</b>
+    *   💫<b>待定(省略)</b>
 ---
 
 *   #### Redux模块热替换
@@ -836,5 +842,23 @@
     // ++     store.replaceReducer(nextCombineReducers);
     // ++ });
     ```
+---
 
+*   #### 模拟Ajax数据
+    *   yarn -D add mockjs
+    *   http://jsonplaceholder.typicode.com/(这个网站也能模拟请求JSON数据)
+---
+
+*   #### 使用CSS Modules
+    *   💫<b>待定(省略)</b>
+---
+
+*   #### 后续
+    *   :seedling: 基本骨架就是这样。文件目录没有做统一,因为大家的习惯可能不一样。后续会补充如下部分:
+
+    *   Antd
+
+    *   React Native
+
+    *   配合Express
     

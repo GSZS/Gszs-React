@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
-export default class Home extends Component{
+import {hot} from 'react-hot-loader'
+
+class Home extends Component{
     constructor(props){
         super(props);
         this.ChangeState = this.ChangeState.bind(this);
@@ -27,3 +29,5 @@ export default class Home extends Component{
         )
     }
 }
+
+export default hot(module)(Home) // 解决code-split与react-hot-loader的冲突
