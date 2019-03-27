@@ -33,7 +33,7 @@ const proConfig = {
         }),
         new Webpack.HashedModuleIdsPlugin(), // 使vendor.xxx.js缓存在本地
         new CleanWebpackPlugin(), // 用于在构建之前删除构建文件夹
-        new ExtractTextWebpackPlugin({
+        new ExtractTextWebpackPlugin('../dist/css/[name].css',{
             filename: 'style.css',
             allChunks: true,
         })

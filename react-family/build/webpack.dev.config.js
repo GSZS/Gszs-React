@@ -9,11 +9,12 @@ const devConfig = {
     entry: {
         app: [
             'react-hot-loader/patch', // 热更替
-            path.join(__dirname, 'src/index.js')            
+            path.join(__dirname, '../src/index.js')            
         ],
     },
     output: {
         filename: '[name].[hash].js',   // 处理缓存
+
     },
     module: {
         rules: [
@@ -24,7 +25,7 @@ const devConfig = {
         ]
     },
     devServer: { // 热更
-        contentBase: path.join(__dirname, './dist'),
+        contentBase: path.join(__dirname, '../dist/'),
         hot: true,
         historyApiFallback: true,
         compress: true,

@@ -4,8 +4,8 @@
   "description": "React全家桶",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.prod.config.js",
-    "dev": "webpack-dev-server --config webpack.dev.config.js"
+    "build": "webpack --config build/webpack.prod.config.js",
+    "dev": "webpack-dev-server --config build/webpack.dev.config.js"
   },
   "keywords": [
     "React"
