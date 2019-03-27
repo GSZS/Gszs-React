@@ -30,6 +30,20 @@ module.exports = {
                         limit: 8192 // <=8K的图片可以直接插入<img/>中
                     }
                 }
+            },
+            // SVG配置
+            {
+                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                use: [
+                    {loader: 'babel-loader'},
+                    {
+                        loader: '@svgr/webpack',
+                        options: {
+                            babel: false,
+                            icon: true,
+                        },
+                    }
+                ]
             }
         ]
     },
