@@ -16,7 +16,7 @@ const proConfig = {
     module: {
         rules: [
             {
-                test: /\.css$/,
+                test: /\.(css|less)$/,
                 use: ExtractTextWebpackPlugin.extract({ // 抽离css
                     fallback: 'style-loader',
                     use: ['css-loader','less-loader']

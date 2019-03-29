@@ -67,6 +67,7 @@ module.exports = {
             component: path.join(__dirname, '../src/component'),
             actions: path.join(__dirname, '../src/redux/actions'),
             reducers: path.join(__dirname, '../src/redux/reducers'),
+            demo: path.join(__dirname, '../src/demo')
         }
     }
 }
