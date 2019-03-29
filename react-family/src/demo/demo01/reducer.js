@@ -5,7 +5,6 @@ const initState = {
 }
 
 const counterReducer = (state=initState, action) => {
-    console.log(action.value)
     switch(action.type){
         case 'Plus':
             return {

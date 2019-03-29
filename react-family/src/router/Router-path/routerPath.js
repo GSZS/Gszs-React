@@ -21,8 +21,16 @@ const RouterPath = () => (
                 <Link to="/demo1">Demo1</Link>
             </div>
         </Col>
-        <Col span={2} ><Link to="/userinfo">UserInfo</Link></Col>
-        <Col span={2} ><Link to='/Antd'>Antd</Link></Col>
+        <Col span={2} >
+            <div className="gutter-box">
+                <Link to="/demo2">Demo2</Link>
+            </div>
+        </Col>
+        <Col span={2} >
+            <div className="gutter-box">
+                <Link to='/Antd'>Antd</Link>
+            </div>
+        </Col>
     </Row>
 )
 

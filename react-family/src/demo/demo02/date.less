@@ -1,0 +1,32 @@
+// date.less
+
+.DateBox{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #61DAFB;
+    font-size: 42px;
+    font-weight: 600;
+    .ControlSwitch{
+        text-align: center;
+    }
+    .CircleDate{
+        border: 1.5px solid #999;
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        background-color: #282C34;
+        text-align: center;
+        span{
+            &:first-child{
+                display: inline-block;
+                margin-top: 40px;  
+            };
+            &:last-child{
+                font-size: 20px;
+                font-weight: 400;
+            }
+        }
+    }
+}

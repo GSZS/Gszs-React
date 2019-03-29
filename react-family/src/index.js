@@ -2,8 +2,7 @@ import React ,{ComPonent} from 'react'
 import ReactDOM from 'react-dom'
 import getRouter from 'router/router'
 import {AppContainer} from 'react-hot-loader'
-// import store from './redux/store/store'
-import store from 'demo/demo01/store'
+import store from 'demo/demo02/store'
 import {Provider} from 'react-redux'
 
 //初始化
