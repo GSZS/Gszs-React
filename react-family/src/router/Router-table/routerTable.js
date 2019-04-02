@@ -9,7 +9,7 @@ import {Route, Switch} from 'react-router-dom';
 import Home from 'bundle-loader?lazy&name=home!pages/Home'
 import Demo1 from 'bundle-loader?lazy&name=demo1!demo/demo01/counter'
 import Demo2 from 'bundle-loader?lazy&name=demo2!demo/demo02/date'
-import A_date from 'bundle-loader?lazy&name=a_date!pages/Antd/demo01'
+import Demo3 from 'bundle-loader?lazy&name=demo3!demo/demo03/calculagraph'
 
 const Loading = function () {
     return <div>Loading...</div>
@@ -28,7 +28,7 @@ const RouterTable = () => (
         <Route exact path="/" component={createComponent(Home)}/>
         <Route path="/demo1" component={createComponent(Demo1)}/>
         <Route path="/demo2" component={createComponent(Demo2)}/>
-        <Route path="/Antd" component={createComponent(A_date)} />
+        <Route path="/demo3" component={createComponent(Demo3)}/>
     </Switch>
 )
 

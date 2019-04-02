@@ -28,7 +28,7 @@ const RouterPath = () => (
         </Col>
         <Col span={2} >
             <div className="gutter-box">
-                <Link to='/Antd'>Antd</Link>
+                <Link to='/demo3'>Demo3</Link>
             </div>
         </Col>
     </Row>
