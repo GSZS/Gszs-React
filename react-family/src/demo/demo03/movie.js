@@ -13,55 +13,36 @@ class Movie extends Component{
 
     // 获取随机Star
     getStar(){
-        return Math.random() * 5
+        return Math.floor(Math.random() * 5);
     }
 
     render(){
-
         // Card内容信息
-        const Meta = Card;
+        const {Meta} = Card;
 
         return(
             <React.Fragment>
                 <div className={'cardBox'}>
                     <Row type="flex" justify="space-around">
-                        {/* <Col span={8}>
-                            <Card hoverable cover={<img src="./img/img1.jpg" alt="404" />}>
-                                <Meta title="Movie-1" description="https://github.com/GSZS/Gszs-React"/>
-                                <Rate allowHalf defaultValue={this.getStar()} />
-                            </Card>  
-                        </Col>
-                        <Col span={8}>
-                            <Card hoverable cover={<img src="./img/img2.png" alt="404" />}>
-                                <Meta title="Movie-2" description="https://github.com/GSZS/Gszs-React"/>
-                                <Rate allowHalf defaultValue={this.getStar()} />
-                            </Card>  
-                        </Col>
-                        <Col span={8}>
-                            <Card hoverable cover={<img src="./img/img3.png" alt="404" />}>
-                                <Meta title="Movie-3" description="https://github.com/GSZS/Gszs-React"/>
-                                <Rate allowHalf defaultValue={this.getStar()} />
-                            </Card>  
-                        </Col> */}
-
-                        
-                        [...Array(3)].map((v,i) => {
-                            <Col span={8}>
-                                <Card hoverable cover={<img src={`./img/img${i}.jpg`} alt="404"/>}>
-                                    <Meta title="Movie-2" description="https://github.com/GSZS/Gszs-React"/>
-                                    <Rate allowHalf defaultValue={this.getStar()} />
-                                </Card>  
-                            </Col>
-                        })
-
-
-                    </Row>
-                    <Row>
-
+                        {[...Array(4)].map((v,i) => {
+                            return(
+                                <Col key={i} xs={{span:24}} sm={{span:24}} md={{span:24}} lg={{span:12}} xl={{span:8}} >
+                                    <Card hoverable cover={<img src={require(`./img/img${i+1}.jpg`)} alt={'404'}/>} >
+                                        <Meta title="Card title" description="Final Fantasy XV" />
+                                        <p>King Regis, who oversees the land of Lucis, 
+                                            commands his army of soldiers to protect the kingdom from the Niflheim 
+                                            empire's plans to steal the sacred crystal.
+                                        </p>
+                                        <Rate allowHalf defaultValue={this.getStar()} />
+                                    </Card>  
+                                </Col>
+                            )
+                        })}
                     </Row>
                 </div>
             </React.Fragment>
         )
     }
-
 }
+
+export default Movie;
