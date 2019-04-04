@@ -5,6 +5,8 @@ import React, {Component} from 'react'
 // 组件
 import NavLeft from './NavLeft/navleft'
 import Gheader from './Header/header'
+import Footer from './Footer/Footer'
+import Home from 'pages/Home/home'
 
 // antD
 import {Row, Col} from 'antd'
@@ -22,6 +24,8 @@ class Gadmin extends Component{
                 </Col>
                 <Col span={21}>
                     <Gheader/>
+                    <Home/>
+                    <Footer/>
                 </Col> 
             </Row>
         )

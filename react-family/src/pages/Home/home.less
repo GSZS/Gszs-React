@@ -1,0 +1,20 @@
+// Home.less
+
+@import '../../components/config/public.less';
+
+.homeBox {
+    ._width(100%);
+    ._height(calc(60vh));
+    .flexbetween();
+    background-color: #e9e9e98f;
+    .mainContent{
+        .flexbetween();
+        ._width(90%);
+        ._height(90%);
+        box-shadow: 0px 0px 1px 2px white;
+        background-color: white;
+        span {
+            ._font(@fontweight: 600, @fontcolor: #5b5959);
+        }
+    }
+}
