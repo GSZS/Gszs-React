@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import {AppContainer} from 'react-hot-loader'
 // import store from 'demo/demo03/store'
 import {Provider} from 'react-redux'
-import Movie from 'demo/demo03/movie.js'
+import Gadmin from 'components/admin'
 
 //初始化
 // renderWithHotReload(getRouter())
@@ -29,7 +29,7 @@ function renderWithHotReload(RootElement) {
             {/* <Provider store={store}>
                 {RootElement}
             </Provider> */}
-            <Movie/>
+            <Gadmin/>
         </AppContainer>,
         document.getElementById('app')
     )

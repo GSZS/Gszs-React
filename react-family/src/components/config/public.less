@@ -1,0 +1,47 @@
+// 公共less
+
+// 颜色
+@lightblue: lightblue;
+@lightywllow: lightywllow;
+@lightgreen: lightgreen;
+
+
+// 居中
+._place{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);   
+}
+
+// width
+._width(@value){
+    width: @value;
+}
+
+// height
+._height(@height){
+    height: @height;
+}
+
+//font
+._font(@fontsize: 20px, @fontweight:400, @fontcolor: white){
+    font-size: @fontsize;
+    font-weight: @fontweight;
+    color: @fontcolor;
+}
+
+// inline-block
+._inline-block(@display:inline-block){
+    display: @display;
+}
+
+// margin
+._margin(@t: 0, @r: 0, @b: 0, @l: 0){
+    margin: @t @r @b @l;
+}
+
+// border
+._border(@style: solid, @size: 1px, @color: white){
+    border: @style @size @color;
+}

@@ -8,7 +8,7 @@
         ["import", {
             "libraryName": "antd",
             "libraryDirectory": "es",
-            "style": "css" // `style: true` 会加载 less 文件
+            "style": "css" // 使用css无法通过更变less变量来更改主题
           }],
         [
             "@babel/plugin-proposal-decorators",

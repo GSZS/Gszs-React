@@ -1,0 +1,42 @@
+// header.less
+
+@import '../config/public.less';
+
+.headerBox{
+    box-shadow: 4px 1px 4px 3px #ccc;
+    .headerTop{
+        ._height(60px);
+        ._font(17px, 500, #614d4d);
+        border-bottom: solid 2px #b2850d;
+        .ooa{
+            line-height: 60px;
+            float: right;
+            span{
+                &:last-child{
+                    a{
+                        color: rgb(191, 35, 35);
+                    }
+                    padding: 0 20px;
+                }
+            }
+        }
+    }
+    .headerMiddle-left{
+        padding: 15px 0 10px 30px;
+        ._font(25px, 600, #333);
+        display: inline-block;
+    }
+    .headerMiddle-right{
+        float: right;
+        padding: 20px 20px 10px 30px;        
+        span{
+            &:first-child{
+                ._font(18px, 400,#614d4d)
+            }
+            &:last-child{
+                padding-left: 20px;
+                ._font(18px, 400,#614d4d)
+            }
+        }
+    }
+}
