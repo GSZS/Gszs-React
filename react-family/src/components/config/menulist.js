@@ -32,8 +32,12 @@ const menuList = [
                 key: '/admin/form/lowform'
             },
             {
-                title: '高级表单',
-                key: '/admin/form/highform'
+                title: '注册',
+                key: '/admin/form/register'
+            },
+            {
+                title: '登录',
+                key: '/admin/form/logoinin'
             }
         ]
     },

@@ -14,6 +14,7 @@ import Nomatch from 'pages/Nomatch/nomatch'
 import Date from 'pages/Ui/Date/date'
 import Card from 'pages/Ui/Card/card'
 import Form from 'pages/Ui/Form/form'
+import Register from 'pages/Ui/Register/register'
 
 
 // config
@@ -33,6 +34,7 @@ class Grouter extends Component{
                                 <Route path='/admin/ui/date' component={Date} />
                                 <Route path='/admin/ui/card' component={Card} />
                                 <Route path='/admin/form/lowform' component={Form} />
+                                <Route path='/admin/form/register' component={Register} />
                                 <Route component={Nomatch} />
                             </Switch>   
                         </Admin>
