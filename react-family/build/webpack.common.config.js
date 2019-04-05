@@ -63,7 +63,6 @@ module.exports = {
     resolve: { // 增加别名设置
         alias: {
             pages: path.join(__dirname, '../src/pages'),
-            router: path.join(__dirname, '../src/router'),
             component: path.join(__dirname, '../src/component'),
             actions: path.join(__dirname, '../src/redux/actions'),
             reducers: path.join(__dirname, '../src/redux/reducers'),
