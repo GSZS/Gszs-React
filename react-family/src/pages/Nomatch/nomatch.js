@@ -15,7 +15,7 @@ class Nomatch extends Component{
                 </div>
             </React.Fragment>
         )
-    }
+    } 
 }
 
 export default Nomatch

@@ -11,6 +11,9 @@ import Admin from 'components/admin'
 import Home from 'pages/Home/home'
 import Button from 'pages/Ui/Button/button'
 import Nomatch from 'pages/Nomatch/nomatch'
+import Date from 'pages/Ui/Date/date'
+import Card from 'pages/Ui/Card/card'
+import Form from 'pages/Ui/Form/form'
 
 
 // config
@@ -24,9 +27,14 @@ class Grouter extends Component{
                 <App>
                     <Route path='/admin' render={() => 
                         <Admin>
-                            <Route path='/admin' component={Home} exact />
-                            <Route path='/admin/ui/button' component={Button} />
-                            <Route component={Nomatch} />
+                            <Switch>
+                                <Route path='/admin' component={Home} exact />
+                                <Route path='/admin/ui/button' component={Button} />
+                                <Route path='/admin/ui/date' component={Date} />
+                                <Route path='/admin/ui/card' component={Card} />
+                                <Route path='/admin/form/lowform' component={Form} />
+                                <Route component={Nomatch} />
+                            </Switch>   
                         </Admin>
                     } />
                 </App>
