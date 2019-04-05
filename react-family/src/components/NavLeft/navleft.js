@@ -12,6 +12,9 @@ import MenuConfig from '../config/menulist'
 // less
 import './navLeft.less'
 
+// react-router-dom
+import {NavLink} from 'react-router-dom'
+
 class NavLeft extends Component{
     constructor(props){
         super(props);
@@ -36,7 +39,9 @@ class NavLeft extends Component{
                     </SubMenu>
                 )
             }
-            return <Menu.Item key={item.key}>{item.title}</Menu.Item>
+            return(<Menu.Item key={item.key}>
+                        <NavLink to={item.key}>{item.title}</NavLink>
+                    </Menu.Item>)
         })
             
     }

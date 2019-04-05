@@ -24,7 +24,7 @@ class Gadmin extends Component{
                 </Col>
                 <Col span={21}>
                     <Gheader/>
-                    <Home/>
+                    {this.props.children}
                     <Footer/>
                 </Col> 
             </Row>
