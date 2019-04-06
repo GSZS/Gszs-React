@@ -19,10 +19,17 @@ class Gadmin extends Component{
     render(){
         return(
             <Row>
-                <Col span={3}>
+                <Col span={3} className="leftCol">
                     <NavLeft/>
                 </Col>
-                <Col span={21}>
+                <Col span={21} className="rightCol"
+                    style={
+                        {
+                            height: `calc(100vh)`,
+                            overflow: 'auto'
+                        }
+                    }    
+                >
                     <Gheader/>
                     {this.props.children}
                     <Footer/>
