@@ -3,7 +3,7 @@
 import React,{Component} from 'react'
 
 // antD
-import {Card, Table, Modal} from 'antd'
+import {Card, Table, Modal, Button, message} from 'antd'
 
 // less
 import './table.less'
@@ -15,6 +15,7 @@ class BasicTable extends Component{
     constructor(props){
         super(props)
         this.ClickTableHandle = this.ClickTableHandle.bind(this)
+        this.handleDelete = this.handleDelete.bind(this)
         this.state = {} // 处理异步API情况
     }
 
@@ -27,6 +28,7 @@ class BasicTable extends Component{
                 isShowLoading: true
             },
         }).then((data, error)=>{
+            console.log('我执行了多少次');
             if(data.status === 200){
                 this.setState({
                     dataSource: data.data.Result
@@ -35,17 +37,49 @@ class BasicTable extends Component{
         })
     }
 
+    handleDelete(){
+        let selectId = this.state.selectedRowKeys; // Array
+        let storeid = []; // 存放被选中的按钮id
+        selectId.map((item)=>{
+            storeid.push(item)
+        })
+        Modal.confirm({
+            title: `你确定要删除吗?`,
+            content: `被删除的数据是: ${storeid.join(',')}`,
+            onOk:() => {
+                message.success('删除成功,即将刷新');
+                // 失误demo演示,当初不应该把axios封装放入componentWillMoun中,不然这部可以同化
+                axios.ajax({
+                    method: 'get',
+                    url: '/table/list',
+                    data: {
+                        isShowLoading: true
+                    },
+                }).then((data, error)=>{
+                    if(data.status === 200){
+                        this.setState({
+                            dataSource: data.data.Result,
+                            selectId: [],
+                            selectItem: null
+                        })
+                    }
+                })
+            }
+        })
+    }
+
+
     // 点击表格行命中单选框
     ClickTableHandle(record, index){
         let selectKeys = [index] // 配合如果rowSelection可能为checkbox
         Modal.info({
             title: '命中',
-            content: `用户名: ${record.username} - 地址: ${record.adress}`
+            content: `用户名: ${record.username} - 地t址: ${record.adress}`
         })
         // setState selectKeys selectItem
         this.setState({
             selectedRowKeys: selectKeys,
-            selecrItem: record
+            selectItem: record
         })
     }
 
@@ -55,6 +89,16 @@ class BasicTable extends Component{
         const rowSelection = {
             type: 'radio',
             selectedRowKeys: selectedRowKeys
+        }
+        
+        const rowCheckSelection = {
+            type: 'checkbox',
+            selectedRowKeys,
+            onChange: (selectedRowKeys, selectedRows) => {
+                this.setState({
+                    selectedRowKeys
+                })
+            }
         }
 
         // 列描述对象
@@ -106,6 +150,9 @@ class BasicTable extends Component{
         return(
             <React.Fragment>
                 <div className="tableBox">
+                    <div>
+                        <Button type="primary" onClick={this.handleDelete}>删除</Button>
+                    </div>
                     <Table
                         columns = {columns}
                         dataSource = {this.state.dataSource}
@@ -120,6 +167,14 @@ class BasicTable extends Component{
                                 }
                             }
                         }}
+                    />
+                </div>
+
+                <div className="checkTableBox">
+                    <Table
+                        columns={columns}
+                        dataSource = {this.state.dataSource}
+                        rowSelection = {rowCheckSelection}
                     />
                 </div>
             </React.Fragment>
