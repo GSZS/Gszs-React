@@ -3,7 +3,7 @@
 import React,{Component} from 'react'
 
 // antD
-import {Card, Table} from 'antd'
+import {Card, Table, Modal} from 'antd'
 
 // less
 import './table.less'
@@ -14,6 +14,7 @@ import axios from '../../../components/axios/axios'
 class BasicTable extends Component{
     constructor(props){
         super(props)
+        this.ClickTableHandle = this.ClickTableHandle.bind(this)
         this.state = {} // 处理异步API情况
     }
 
@@ -34,8 +35,27 @@ class BasicTable extends Component{
         })
     }
 
+    // 点击表格行命中单选框
+    ClickTableHandle(record, index){
+        let selectKeys = [index] // 配合如果rowSelection可能为checkbox
+        Modal.info({
+            title: '命中',
+            content: `用户名: ${record.username} - 地址: ${record.adress}`
+        })
+        // setState selectKeys selectItem
+        this.setState({
+            selectedRowKeys: selectKeys,
+            selecrItem: record
+        })
+    }
 
     render(){
+        const selectedRowKeys = this.state.selectedRowKeys;
+        // 表格配置
+        const rowSelection = {
+            type: 'radio',
+            selectedRowKeys: selectedRowKeys
+        }
 
         // 列描述对象
         const columns = [
@@ -89,6 +109,17 @@ class BasicTable extends Component{
                     <Table
                         columns = {columns}
                         dataSource = {this.state.dataSource}
+                        rowSelection={rowSelection}
+                        onRow={(record,index)=>{
+                            return {
+                                onClick: () => {
+                                    /**
+                                     * record: 该列下的行值
+                                     */
+                                    this.ClickTableHandle(record, index)
+                                }
+                            }
+                        }}
                     />
                 </div>
             </React.Fragment>
