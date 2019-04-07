@@ -15,6 +15,7 @@ import Date from 'pages/Ui/Date/date'
 import Card from 'pages/Ui/Card/card'
 import Form from 'pages/Ui/Form/form'
 import Register from 'pages/Ui/Register/register'
+import BasicTable from 'pages/Ui/Table/table'
 
 
 // config
@@ -35,6 +36,7 @@ class Grouter extends Component{
                                 <Route path='/admin/ui/card' component={Card} />
                                 <Route path='/admin/form/lowform' component={Form} />
                                 <Route path='/admin/form/register' component={Register} />
+                                <Route path='/admin/table/lowtable' component={BasicTable} />
                                 <Route component={Nomatch} />
                             </Switch>   
                         </Admin>

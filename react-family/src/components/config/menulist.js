@@ -47,11 +47,11 @@ const menuList = [
         children: [
             {
                 title: '基础表格',
-                key: '/admin/form/lowtable'
+                key: '/admin/table/lowtable'
             },
             {
                 title: '高级表格',
-                key: '/admin/form/hightable'
+                key: '/admin/table/hightable'
             }
         ]
     },

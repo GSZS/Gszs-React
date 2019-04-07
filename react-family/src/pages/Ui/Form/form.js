@@ -97,13 +97,6 @@ class Gform extends Component{
                         <a href="#" className="forgetPassword" style={{float: 'right'}}>忘记密码</a>
                     </Formitem>
                     <Formitem>
-                        {
-                            getFieldDecorator('readRule', {
-                                initialValue
-                            })
-                        }
-                    </Formitem>
-                    <Formitem>
                         <Button type="primary" onClick={this.verifyHandle.bind(this)}>登录</Button>
                     </Formitem>
                  </Form>
