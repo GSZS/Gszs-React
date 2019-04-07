@@ -149,34 +149,38 @@ class BasicTable extends Component{
 
         return(
             <React.Fragment>
-                <div className="tableBox">
+                <Card title="radio表格">
+                    <div className="tableBox">
+                        <Table
+                            columns = {columns}
+                            dataSource = {this.state.dataSource}
+                            rowSelection={rowSelection}
+                            onRow={(record,index)=>{
+                                return {
+                                    onClick: () => {
+                                        /**
+                                         * record: 该列下的行值
+                                         */
+                                        this.ClickTableHandle(record, index)
+                                    }
+                                }
+                            }}
+                        />
+                    </div>
+                </Card>
+                
+                <Card title="checkBox表格">
                     <div>
                         <Button type="primary" onClick={this.handleDelete}>删除</Button>
                     </div>
-                    <Table
-                        columns = {columns}
-                        dataSource = {this.state.dataSource}
-                        rowSelection={rowSelection}
-                        onRow={(record,index)=>{
-                            return {
-                                onClick: () => {
-                                    /**
-                                     * record: 该列下的行值
-                                     */
-                                    this.ClickTableHandle(record, index)
-                                }
-                            }
-                        }}
-                    />
-                </div>
-
-                <div className="checkTableBox">
-                    <Table
-                        columns={columns}
-                        dataSource = {this.state.dataSource}
-                        rowSelection = {rowCheckSelection}
-                    />
-                </div>
+                    <div className="checkTableBox">
+                        <Table
+                            columns={columns}
+                            dataSource = {this.state.dataSource}
+                            rowSelection = {rowCheckSelection}
+                        />
+                    </div>
+                </Card>
             </React.Fragment>
         )
     }
