@@ -7,7 +7,7 @@ const menuList = [
     },
     {
         title: 'UI',
-        key: './admin/ui',
+        key: '/admin/ui',
         children: [
             {
                 title: '按钮',
@@ -65,7 +65,7 @@ const menuList = [
     },
     {
         title: '订单管理',
-        key: 'admin/controlindent'
+        key: 'admin/order'
     },
     {
         title: '员工管理',

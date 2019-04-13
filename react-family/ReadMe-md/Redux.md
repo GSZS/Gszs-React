@@ -48,7 +48,7 @@
 
     mapDispatchToProps作用是当你要通过一个函数来触发action时需要在mapDispatchToProps定义那个改变函数。
 
-    ** 详细解释: 因为调用触发派发action的 "dispatch1" 函数只会返回action,并没有将其派发出去,所以需要使用dispatch将 "dispatch1" 包裹派发出去,但是为了不让组件感知到dispatch的存在,所以需要对 "dispatch1" 进行包装一下
+    ** 详细解释: 因为调用触发派发action的 "dispatch1" 函数只会返回action,并没有将其派发出去,所以需要使用dispatch将 "dispatch1" 包裹派发出去,但是为了不让组件感知到dispatch的存在,所以需要包装一下
     */
 
     const mapDispatchToProps = (dispatch, ownProps) => {
@@ -58,7 +58,6 @@
             }
         }
     }
-
     ```
 
 *   ## :palm_treemap:connect()

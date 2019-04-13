@@ -21,6 +21,10 @@ class Gheader extends Component{
     }
 
     componentWillMount(){
+        const {secondRoute} = this.props;
+        this.setState({
+            secondRoute
+        })
         this.getnowtime = setInterval(()=>this.setState({
             time: Utils.dateFormate(new Date().getTime())
         }),1000)
@@ -73,7 +77,11 @@ class Gheader extends Component{
                             </div>
                         </div>                    
                         <div className="headerMiddle-left">
-                            <span>首页</span>
+                            <span>
+                                {
+                                    this.state.secondRoute ? '其他路由' : '主页'
+                                }
+                            </span>
                         </div>
                         <div className="headerMiddle-right">
                             <span>{this.state.time}</span>

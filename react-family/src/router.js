@@ -16,7 +16,10 @@ import Card from 'pages/Ui/Card/card'
 import Form from 'pages/Ui/Form/form'
 import Register from 'pages/Ui/Register/register'
 import BasicTable from 'pages/Ui/Table/table'
-
+import CityMap from 'pages/Ui/CityMap/citymap'
+import Order from 'pages/Order/order'
+import Common from './Common'
+import PageOne from './pages/OtherPages/page1'
 
 // config
 import MenuConfig from '../src/components/config/menulist'
@@ -37,9 +40,16 @@ class Grouter extends Component{
                                 <Route path='/admin/form/lowform' component={Form} />
                                 <Route path='/admin/form/register' component={Register} />
                                 <Route path='/admin/table/lowtable' component={BasicTable} />
+                                <Route path='/admin/controlcity' component={CityMap} />
+                                <Route path='/admin/order' component={Order} />
                                 <Route component={Nomatch} />
-                            </Switch>   
+                            </Switch>
                         </Admin>
+                    } />
+                    <Route path='/common' render={() => 
+                        <Common>
+                            <Route path='/common/order/detail/:orderid' component={PageOne} />
+                        </Common>
                     } />
                 </App>
             </Router>

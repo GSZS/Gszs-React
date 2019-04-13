@@ -3,7 +3,7 @@
 import React,{Component} from 'react'
 
 // antD
-import {Card, Table, Modal, Button, message} from 'antd'
+import {Card, Table, Modal, Button, message, Badge} from 'antd'
 
 // less
 import './table.less'
@@ -28,8 +28,7 @@ class BasicTable extends Component{
                 isShowLoading: true
             },
         }).then((data, error)=>{
-            console.log('我执行了多少次');
-            if(data.status === 200){
+            if(data.status === 200){    
                 this.setState({
                     dataSource: data.data.Result
                 })
@@ -48,7 +47,7 @@ class BasicTable extends Component{
             content: `被删除的数据是: ${storeid.join(',')}`,
             onOk:() => {
                 message.success('删除成功,即将刷新');
-                // 失误demo演示,当初不应该把axios封装放入componentWillMoun中,不然这部可以同化
+                // 同化
                 axios.ajax({
                     method: 'get',
                     url: '/table/list',
@@ -65,6 +64,13 @@ class BasicTable extends Component{
                     }
                 })
             }
+        })
+    }
+
+    // 升降序
+    sortedHandle(pagination, filters, sorter){
+        this.setState({
+            sortOrder: sorter.order
         })
     }
 
@@ -109,7 +115,11 @@ class BasicTable extends Component{
             },
             {
                 title: '年龄',
-                dataIndex: 'years'
+                dataIndex: 'years',
+                sorter: (a,b)=>{
+                    return a.years - b.years
+                },
+                sortOrder: this.state.sortOrder
             },
             {
                 title: '性别',
@@ -127,11 +137,11 @@ class BasicTable extends Component{
                 dataIndex: 'adress',
                 render(adress){
                     let config = {
-                        '1': '厦门思明区',
-                        '2': '厦门大学',
-                        '3': '南普陀托寺',
-                        '4': '思明区',
-                        '5': '鼓浪屿',
+                        '1': <Badge status="success" text="厦门思明区" />,
+                        '2': <Badge status="processing" text="厦门大学" />,
+                        '3': <Badge status="warning" text="南普陀寺" />,
+                        '4': <Badge status="default" text="思明区" />,
+                        '5': <Badge status="error" text="鼓浪屿" />,
                         '6': '环岛路',
                         '7': '曾厝垵',
                         '8': '中山路',
@@ -178,6 +188,7 @@ class BasicTable extends Component{
                             columns={columns}
                             dataSource = {this.state.dataSource}
                             rowSelection = {rowCheckSelection}
+                            onChange = {this.sortedHandle.bind(this)}
                         />
                     </div>
                 </Card>
