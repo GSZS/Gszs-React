@@ -96,7 +96,7 @@ class Gheader extends Component{
     }
 }
 
-// 从中央数据状态取menuName
+// 从中央数据取menuName
 const mapStateToProps = (state, ownProps) => {
     return {
         menuName: state.menuName
