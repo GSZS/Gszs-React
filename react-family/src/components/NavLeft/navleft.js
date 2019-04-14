@@ -21,8 +21,22 @@ class NavLeft extends Component{
         this.renderMenu = this.renderMenu.bind(this);
     }
 
+    handleClick(item){
+        console.log(item.item.props.children.props.children);
+        const currentStatus = item.key
+        this.setState({
+            currentStatus
+        })
+    }
+
     componentWillMount(){
         const menuState = this.renderMenu(MenuConfig)
+        // 处理路由首次进入被选中        
+        const currentStatus = window.location.hash.replace(/#|\?.*$/ig,'')
+        this.setState({
+            currentStatus
+        })        
+
         this.setState({
             menuState
         })
@@ -60,7 +74,11 @@ class NavLeft extends Component{
                         </div>
                         <div className="navmenu">
                             <div className="navlist">
-                                <Menu theme="dark">
+                                <Menu 
+                                    selectedKeys = {[this.state.currentStatus]}
+                                    theme="dark"
+                                    onClick = {this.handleClick.bind(this)}
+                                >
                                     {this.state.menuState}
                                 </Menu>
                             </div>
