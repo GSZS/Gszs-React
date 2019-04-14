@@ -1,6 +1,10 @@
 // navleft.js
 
+// React, React-redux, React-router-dom
 import React,{Component} from 'react'
+import {connect} from 'react-redux'
+import {NavLink} from 'react-router-dom'
+import {Switch_Status} from '../../redux/actions/index'
 
 // antD
 import {Row, Col, Menu} from 'antd'
@@ -12,8 +16,6 @@ import MenuConfig from '../config/menulist'
 // less
 import './navLeft.less'
 
-// react-router-dom
-import {NavLink} from 'react-router-dom'
 
 class NavLeft extends Component{
     constructor(props){
@@ -22,7 +24,11 @@ class NavLeft extends Component{
     }
 
     handleClick(item){
-        console.log(item.item.props.children.props.children);
+        const title = item.item.props.children.props.children;
+        const { dispatch } = this.props
+        // 派发action
+        dispatch(Switch_Status(title))
+        
         const currentStatus = item.key
         this.setState({
             currentStatus
@@ -90,4 +96,5 @@ class NavLeft extends Component{
     }
 }
 
-export default NavLeft;
+// 连接Redux
+export default connect()(NavLeft)

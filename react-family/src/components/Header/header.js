@@ -1,6 +1,8 @@
 // header.js
 
+// React, React-redux 
 import React,{Component} from 'react'
+import {connect} from 'react-redux'
 
 // antD
 import {Row, Col, Icon} from 'antd'
@@ -18,13 +20,12 @@ class Gheader extends Component{
     constructor(props){
         super(props)
         this.getWeatherApiData = this.getWeatherApiData.bind(this)
+        this.state = {}
     }
 
     componentWillMount(){
         const {secondRoute} = this.props;
-        this.setState({
-            secondRoute
-        })
+        
         this.getnowtime = setInterval(()=>this.setState({
             time: Utils.dateFormate(new Date().getTime())
         }),1000)
@@ -78,9 +79,7 @@ class Gheader extends Component{
                         </div>                    
                         <div className="headerMiddle-left">
                             <span>
-                                {
-                                    this.state.secondRoute ? '其他路由' : '主页'
-                                }
+                                {this.state.menuName}
                             </span>
                         </div>
                         <div className="headerMiddle-right">
@@ -97,4 +96,11 @@ class Gheader extends Component{
     }
 }
 
-export default Gheader
+// 从中央数据状态取menuName
+const mapStateToProps = (state, ownProps) => {
+    return {
+        menuName: state.menuName
+    }
+}
+
+export default connect(mapStateToProps)(Gheader)

@@ -2,7 +2,7 @@ import React ,{ComPonent} from 'react'
 import ReactDOM from 'react-dom'
 import Grouter from './router'
 import {AppContainer} from 'react-hot-loader'
-// import store from 'demo/demo03/store'
+import store from './redux/store/store'
 import {Provider} from 'react-redux'
 // import Gadmin from 'components/admin'
 
@@ -29,7 +29,9 @@ function renderWithHotReload(RootElement) {
             {/* <Provider store={store}>
                 {RootElement}
             </Provider> */}
-            <Grouter/>
+            <Provider store={store}>
+                <Grouter/>
+            </Provider>
         </AppContainer>,
         document.getElementById('app')
     )
