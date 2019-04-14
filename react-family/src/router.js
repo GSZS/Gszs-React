@@ -30,18 +30,19 @@ class Grouter extends Component{
         return(
             <Router>
                 <App>
-                    <Route path='/admin' render={() => 
+                    <Switch>
+                    <Route path='/' render={() => 
                         <Admin>
                             <Switch>
-                                <Route path='/admin' component={Home} exact />
-                                <Route path='/admin/ui/button' component={Button} />
-                                <Route path='/admin/ui/date' component={Date} />
-                                <Route path='/admin/ui/card' component={Card} />
-                                <Route path='/admin/form/lowform' component={Form} />
-                                <Route path='/admin/form/register' component={Register} />
-                                <Route path='/admin/table/lowtable' component={BasicTable} />
-                                <Route path='/admin/controlcity' component={CityMap} />
-                                <Route path='/admin/order' component={Order} />
+                                <Route path='/admin' component={Home} />
+                                <Route path='/ui/button' component={Button} />
+                                <Route path='/ui/date' component={Date} />
+                                <Route path='/ui/card' component={Card} />
+                                <Route path='/form/lowform' component={Form} />
+                                <Route path='/form/register' component={Register} />
+                                <Route path='/table/lowtable' component={BasicTable} />
+                                <Route path='/controlcity' component={CityMap} />
+                                <Route path='/order' component={Order} />
                                 <Route component={Nomatch} />
                             </Switch>
                         </Admin>
@@ -51,6 +52,7 @@ class Grouter extends Component{
                             <Route path='/common/order/detail/:orderid' component={PageOne} />
                         </Common>
                     } />
+                </Switch>
                 </App>
             </Router>
         )
