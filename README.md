@@ -1,3 +1,11 @@
+/**
+ * @ 作者: Gszs
+ * @ 创建时间: 2019-03-23 23:43:32
+ * @ 修改人: Gszs
+ * @ 最新修改时间: 2019-05-19 21:52:08
+ * @ 文件解释: 记录React生态的学历过程
+ */
+
 # Gszs-React
 
 #### :cactus: 仓库项目介绍
@@ -18,7 +26,7 @@
     
     *   [终端进行打包测试](#终端进行打包测试)
     
-    *   [配置.balbelrc](#安装babel一系列转换工具并配置balbelrc)
+    *   [配置.babelrc](#安装babel一系列转换工具并配置babelrc) ❗❗❗
     
     *   [安装react react-dom](#安装react-react-dom)
     
@@ -26,7 +34,7 @@
     
     *   [创建一个存放视图组件文件夹](#创建一个存放视图组件文件夹)
     
-    *   [react-router](#react-router)
+    *   [react-router](#react-router) ❗❗❗
 
     *   [热更新](#热更新安装webpack-dev-server)
     
@@ -40,11 +48,11 @@
     
     *   [编译图片](#编译图片)
     
-    *   [Ant Design of React](#使用Ant-Design-of-React组件库)
+    *   [Ant Design of React](#使用Ant-Design-of-React组件库) ❗❗❗
     
     *   [Redux DevTools](#使用Redux-DevTools调试工具)
     
-    *   [按需加载](#按需加载)
+    *   [按需加载](#按需加载) ❗❗❗
     
     *   [缓存](#缓存)
     
@@ -60,15 +68,17 @@
     
     *   [抽离CSS](#抽离CSS)
 
-    *   [使用axios和middleware优化API请求(中间件)](#使用axios和middleware优化API请求中间件)
+    *   [使用axios和middleware优化API请求(中间件)](#使用axios和middleware优化API请求中间件) ❗❗❗
 
-    *   [优化目录结构](#优化目录结构)
+    *   [优化目录结构](#优化目录结构) ❗❗❗
 
-    *   [模拟Ajax数据](#模拟Ajax数据)
+    *   [模拟Ajax数据](#模拟Ajax数据) ❗❗❗
 
     *   [CSS Modules](#使用css-modules)
 
     *   [结束代表刚开始](#后续)
+
+    *   [2019/05/19补充](#2019/05/19)
 
 ---
 
@@ -122,7 +132,7 @@
 
         yarn build
 
-*   #### 安装babel一系列转换工具,并配置.balbelrc
+*   #### 安装babel一系列转换工具,并配置.babelrc
 
         yarn -D add @babel/core
         yarn -D add @babel/preset-env
@@ -699,7 +709,7 @@
     *   yarn -D add axios
     *   cd src/middleware && mkdir middleware && cd middleware && vim promiseMiddleware.js
     ```javascript
-    /* promiseMiddleware.js */
+    /* promiseMiddleware.js(源码) */
     // 请求中间件
     import axios from 'axios'
 
@@ -778,7 +788,7 @@
     // -- const getUserInfoSuccess = (userInfo) => {
     // --    return {
     // --        type: GET_USER_INFO_SUCCESS,
-    // --        userInfo: userInfo,
+    // --        payload: userInfo,
     // --    }
     // -- }
 
@@ -817,7 +827,7 @@
          return {
              ...state,
              isLoading: false,
-    //  ++       userInfo: action.result.data,
+    //  ++       userInfo: action.payload,
              errMessage: ''
         }
     ```
@@ -865,4 +875,360 @@
     *   React Native
 
     *   配合Express
+---
+
+*   #### 2019/05/19:
+
+    *   优化Babelrc配置
+
+    *   补充Ant Design of React
+
+    *   补充react-router
+
+    *   补充使用axios和middleware优化API请求(中间件)
     
+    *   补充优化目录结构
+
+    *   模拟Ajax数据
+
+        ```javascript
+        /** 补充Ant Design of React
+         *  1：表格
+         *  2: 表单组件
+         *  3: 上传
+         */
+
+        // 表格 : 
+        // 一般后台上传后会进入上传管理表格,那么可以抽出一个表单管理基础组件跟表单管理高级组件的公共组件机制
+        // 基础组件没有删除,没有编辑,很纯粹的基础表格组件例如打印日志
+        // 高级组件拥有基础组件里没有的功能
+        // 如下代码分别高级公共表格组件 , 基础公共表格组件
+        
+        /**
+         * @description: 高级表格公共组件
+         * @param: 需要从父组件获取表个头配置,接口地址,一个用于修改,删除的对象
+         */
+        import React,{useState, useEffect} from 'react';
+        import {Table, Input, Button, Popconfirm, Form, message} from 'antd';
+        import { async } from 'rxjs/internal/scheduler/async';
+
+        const FormItem = Form.Item;
+
+        // 创建Context实例
+        const EditableContext = React.createContext();
+
+        // 创建生产者
+        const EditableRow = ({form, index, ...props}) => (
+            <EditableContext.Provider value={form}>
+                <tr {...props} />
+            </EditableContext.Provider>
+        )
+
+        const EditableFormRow = Form.create()(EditableRow);
+
+        // EditableCell
+        const EditableCell = (props) => {
+
+            const getInput = () => {
+            return <Input />;
+            };
+
+                const {
+                    editing,
+                    dataIndex,
+                    title,
+                    inputType,
+                    record,
+                    index,
+                    ...restProps
+                } = props;
+                
+                return (
+                    <EditableContext.Consumer>
+                        {(form) => {
+                            const { getFieldDecorator } = form;
+                            return (
+                                <td {...restProps}>
+                                    {editing ? (
+                                        <FormItem style={{ margin: 0 }}>
+                                            {getFieldDecorator(dataIndex, {
+                                                rules: [{
+                                                    required: true,
+                                                    message: `Please Input ${title}!`,
+                                                }],
+                                                initialValue: record[dataIndex],
+                                            })(getInput())}
+                                        </FormItem>
+                                    ) : restProps.children}
+                                </td>
+                            );
+                        }}
+                    </EditableContext.Consumer>
+                );
+        }
+
+        // EditableTable
+        const EditableTable = (props) => {
+            
+            // 接口地址
+            const [
+            GET_ALL_DATA,
+            DELETE_ALL_DATA,
+            UPDATE_ALL_DATA
+            ] = props.interfaceUrl
+
+
+
+            // 设置初始值
+            const [page, setPage] = useState({}),
+                [data, setData] = useState(null),
+                [filterdata, setFilterdata] = useState(null),
+                [editingKey, setEditingKey] = useState('');
+            
+            // 分页有关
+            const [pageNum, setPageNum] = useState(null),
+                [pageSize, setPageSize] = useState(null),
+                [sortedInfo, setSortedInfo] = useState(null);
+            
+            // 填充表格数据
+            useEffect(() => { 
+            getData()
+            },[])
+
+            const getData = async () => {
+            await GET_ALL_DATA().then((res) => {
+                if(res && res.status === 200 ){
+                    setPage({
+                        total: res.data.length,
+                        pageNum: 1
+                    });
+                    setData(res.data);
+                }else{
+                    message.error(res.message);
+                    setPage({
+                        total: 1,
+                        pageNum: 1
+                    });
+                    setData([]);
+                }
+            })
+            }
+
+            // 改变页码
+            const changePage = (current) => {
+                setPageNum(current)
+            }
+
+            // 每页显示多少条
+            const changePageSize = (pageSize, current) => {
+                setPageSize(pageSize)
+            }
+
+            // 删除操作
+            const HandleDelete = (key) => {
+                    DELETE_ALL_DATA(key).then( (res , err) => {
+                            if(res.status === 200){
+                    message.success(`编号${key}已经删除成功`);
+                    setData([...data].filter(item => item.key !== key));
+                    setEditingKey('')
+                    // props.clearDeleteKey()
+                            }else{
+                                    message.error('删除捕获错误:', err);
+                            }
+                    })
+            }
+
+            // 从父组件获取要删除的key,触发handleDelete
+            const deleteKeyFromFather = props.deleteKeyArr;
+            if( deleteKeyFromFather instanceof Array && deleteKeyFromFather.length > 0){
+            React.memo(HandleDelete(deleteKeyFromFather))
+            }
+
+            // 排序操作
+            const handleChange = (sorter) => {
+                setSortedInfo(sorter)
+            }
+
+            // 操作触发器
+            const isEditing = record => record.key === editingKey;         
+
+            // Edit设置
+            const edit = (key) => setEditingKey(key);
+
+            // 保存修改
+            const save = (form, key) => {
+                    form.validateFields((error, row) => {
+                        if (error) {
+                            return;
+                        }
+                        const newData = [...data];
+                        const index = newData.findIndex(item => key === item.key);
+                        if (index > -1) {
+                            const item = newData[index];
+                            newData.splice(index, 1, {
+                                ...item,
+                                ...row,
+                            });
+                            const requestData = {
+                                ...item,
+                                ...row
+                };
+                
+                /**
+                * @description 传输给后端接口
+                * @param {wheelNo, paramType} 处理几个上传到后端的特殊字段
+                **/ 
+                const _portParam = props._portParam;
+                const _requestData = {};
+                
+                for(let i in _portParam){
+                    _requestData[i] = requestData[i];
+                    if(i === 'wheelNo'){
+                    _requestData[i] = Number(requestData[i])
+                    }
+                    if(i === 'paramType'){
+                    _requestData[i] = 4
+                    }
+                
+                }
+                            UPDATE_ALL_DATA(_requestData).then((res, err) => {
+                    console.log('status=>>',res)
+                                if(res.status === 200){
+                                    message.success('修改成功')
+                                }else{
+                                    message.error(res.message)
+                                }
+                            })
+                            setData(newData);
+                            setEditingKey('')
+                        } else {
+                            newData.push(row);
+                            setData(newData);
+                            setEditingKey('')
+                        }
+                    });
+            }
+            
+
+        // 行选择
+        const rowSelection = {
+            onChange: (selectedRowKeys, selectedRows) => {
+            const selectRowKeysArr = Array.from(selectedRowKeys);
+            // 激活删除按钮
+            selectedRows.length !== 0 ? props.callFn(false, selectRowKeysArr) : props.callFn(true)
+            },
+            getCheckboxProps: record => ({
+            disabled: record.name === 'Disabled User',
+            name: record.name
+            })
+        }
+                
+            // 取消修改
+            const cancel = () => setEditingKey('');
+        
+        const totals = page.total;
+        
+        // 表格分页属性
+        const paginationProps = {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: () => `共${totals}条`,
+            pageSize: pageSize,
+            current: pageNum,
+            total: page.total,
+            onShowSizeChange: (current,pageSize) => changePageSize(pageSize,current),
+            onChange: (current) => changePage(current),
+        };
+
+        // 覆盖默认的table元素
+        const components = {
+            body: {
+                row: EditableFormRow,
+                cell: EditableCell,
+            },
+        };
+
+        // columns表格头(动态导入)
+        const columns = props.columns.map((col) => {
+            if (!col.editable) {
+            return col;
+            }
+            return {
+            ...col,
+            onCell: record => ({
+                record,
+                dataIndex: col.dataIndex,
+                title: col.title,
+                editing: isEditing(record)
+            }),
+            };
+        })
+
+        // 单独处理操作的render(因为硬处理太困难)
+        const dealOperateFn = () => {
+            const columnList = props.columns;
+            columnList.forEach((item) => {
+            if(item.title === '操作'){
+                item.render = (text, record) => {
+                const editable = isEditing(record);
+                return (
+                    <div>
+                    {editable ? (
+                        <span>
+                        <EditableContext.Consumer>
+                            {form => (
+                            <Button
+                                onClick={() => save(form, record.key)}
+                            >
+                                保存修改
+                            </Button>
+                            )}
+                        </EditableContext.Consumer>
+                        <Popconfirm
+                            title="确认取消修改吗?"
+                            onConfirm={() => cancel(record.key)}
+                        >
+                            <Button style = {{ margin: '5px 0px' }}> 取消修改 </Button>
+                        </Popconfirm>
+                        <Popconfirm title="确定要删除吗?" onConfirm={() => HandleDelete(record.key)}>
+                            <a href="javascript:;">
+                                <Button type="danger" className="deleteButton">删除</Button>
+                            </a>
+                        </Popconfirm>
+                        </span>
+                    ) : (
+                        <a disabled={editingKey !== ''} onClick={() => edit(record.key)}>
+                        <Button type="primary"> 设置 </Button>
+                        </a>
+                    )}
+                    </div>
+                )
+                }
+            }
+            })
+        }
+        dealOperateFn();
+
+            // 渲染
+            return(
+            <EditableContext.Provider value={props.form}>
+                <Table
+                    components={components}
+                    rowClassName={() => 'editable-row'}
+                    bordered
+                    dataSource={data}
+                    columns={columns}
+                    pagination = {paginationProps}
+                    onChange = {handleChange}
+                    rowSelection = {rowSelection}
+                />
+            </EditableContext.Provider>
+            )
+        }
+
+        export default EditableTable
+
+        // 基础公共组件
+
+
+        ```
