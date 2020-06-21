@@ -88,7 +88,7 @@
     *   // -- 代表有减少的部分
 ---
 
-*   #### 创建文件夹
+*   ### 创建文件夹
     
         mkdir Gszs-React && cd Gszs-React
 
